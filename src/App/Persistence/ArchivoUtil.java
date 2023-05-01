@@ -1,4 +1,4 @@
-package Persistence;
+package App.Persistence;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;

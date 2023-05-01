@@ -1,4 +1,4 @@
-package Model;
+package App.Model;
 
 public class Documento {
 
