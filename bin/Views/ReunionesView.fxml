@@ -5,27 +5,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane prefHeight="608.0" prefWidth="744.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<BorderPane prefHeight="575.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar prefHeight="18.0" prefWidth="744.0" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Proyecto">
+          <Menu fx:id="proyectoMenu" mnemonicParsing="false" text="Proyecto">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Tareas">
+          <Menu fx:id="tareaMenu" mnemonicParsing="false" text="Tareas">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Reunion">
+          <Menu fx:id="reunionMenu" mnemonicParsing="false" text="Reunion">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Chats">
+            <Menu fx:id="chatsMenu" mnemonicParsing="false" text="Chats">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
               </items>
@@ -34,13 +33,17 @@
       </MenuBar>
    </top>
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="horaReunionColumn" prefWidth="111.0" text="Hora de reunión" />
-          <TableColumn fx:id="reunionColumn" prefWidth="108.0" text="Reunión" />
-            <TableColumn prefWidth="161.0" text="Lugar" />
-            <TableColumn fx:id="descripcionColumn" prefWidth="278.0" text="Descripcion" />
-        </columns>
-      </TableView>
+      <AnchorPane prefHeight="558.0" prefWidth="744.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tblReuniones" layoutX="9.0" layoutY="14.0" prefHeight="450.0" prefWidth="653.0">
+              <columns>
+                <TableColumn fx:id="horaReunionColumn" prefWidth="111.0" text="Hora de reunión" />
+                <TableColumn fx:id="reunionColumn" prefWidth="108.0" text="Reunión" />
+                  <TableColumn fx:id="lugarColumn" prefWidth="220.0" text="Lugar" />
+                  <TableColumn fx:id="descripcionColumn" prefWidth="213.0" text="Descripcion" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>
