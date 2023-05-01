@@ -1,4 +1,4 @@
-package App.Model;
+package Model;
 
 public class Actividad {
 

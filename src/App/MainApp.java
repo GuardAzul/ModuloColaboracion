@@ -1,7 +1,7 @@
 package App;
 import java.io.IOException;
 
-import App.Controllers.ColaboracionViewControllers;
+import Controllers.ColaboracionViewControllers;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,7 +40,7 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("Views/ColaboracionView.fxml"));
+			loader.setLocation(MainApp.class.getResource("../Views/ColaboracionView.fxml"));
 			BorderPane colaboracionOverview = (BorderPane) loader.load();
 			
 			// Give the con+troller access to the main app.

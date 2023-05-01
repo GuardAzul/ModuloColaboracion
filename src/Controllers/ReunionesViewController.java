@@ -1,4 +1,4 @@
-package App.Controllers;
+package Controllers;
 
 public class ReunionesViewController {
 
