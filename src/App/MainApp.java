@@ -34,8 +34,8 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("Views/ColaboracionView.fxml"));
-			BorderPane colaboracionOverview = (BorderPane) loader.load();
+			loader.setLocation(MainApp.class.getResource("Views/Colaboracion.fxml"));
+			AnchorPane colaboracionOverview = (AnchorPane) loader.load();
 			
 			// Give the con+troller access to the main app.
 			// Le doy el acceso al controlodar de la main app

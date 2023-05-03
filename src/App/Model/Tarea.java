@@ -5,6 +5,7 @@ public class Tarea {
 	private String id;
 	private String nombre;
 	private String descripción;
+	private EstadoTarea estado;
 	
 	/**
 	 * Constructor
@@ -18,12 +19,14 @@ public class Tarea {
 	 * @param id
 	 * @param nombre
 	 * @param descripción
+	 * @param estado
 	 */
-	public Tarea(String id, String nombre, String descripción) {
+	public Tarea(String id, String nombre, String descripción, EstadoTarea estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripción = descripción;
+		this.estado = estado;
 	}
 
 	//-------------------------------------------Getters y Setters--------------------------------
@@ -51,8 +54,18 @@ public class Tarea {
 		this.descripción = descripción;
 	}
 
+	public EstadoTarea getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoTarea estado) {
+		this.estado = estado;
+	}
+
 	@Override
 	public String toString() {
-		return "Tarea [id=" + id + ", nombre=" + nombre + ", descripción=" + descripción + "]";
+		return "Tarea [id=" + id + ", nombre=" + nombre + ", descripción=" + descripción + ", estado=" + estado + "]";
 	}
+	
+	
 }

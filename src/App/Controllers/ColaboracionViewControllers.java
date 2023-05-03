@@ -11,20 +11,39 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 
 public class ColaboracionViewControllers implements Initializable {
 
-    @FXML private Menu proyectoMenu;
-    @FXML private Menu tareaMenu;
-    @FXML private Menu reunionMenu;
-    @FXML private Menu chatsMenu;
-    @FXML private Label nombreProyecto;
-    @FXML private TextArea descripcionProyecto;
-	
+	@FXML private TabPane mainTabPane;
+    @FXML private Label lb_nomProyecto;
+    @FXML private Label lb_descProyecto;
+    @FXML private Label lb_estadoProyecto;
+    @FXML private TableView<?> tablaTareas;
+    @FXML private TableColumn<?, ?> col_IdTarea;
+    @FXML private TableColumn<?, ?> col_Tarea;
+    @FXML private TableColumn<?, ?> col_EstadoTarea;
+    @FXML private Button BtnActualizarVendedor;
+    @FXML private ComboBox<?> cbEstadoTarea;
+    @FXML private Label lb_descTarea;
+    
+    @FXML private HBox onlineUsersHbox;
+    @FXML private ListView<?> userList;
+    @FXML private ListView<?> chatPane;
+    @FXML private TextArea messageBox;
+    @FXML private Button btnSend;
+    @FXML private Button btnDoc;
+
     private MainApp mainApp;
     ModelFactoryController modelFactoryController;
     
@@ -40,26 +59,18 @@ public class ColaboracionViewControllers implements Initializable {
 	
 	
 	@FXML
-    void onChatsMenu(ActionEvent event) {
-		
-		try {
-			FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Views/ChatView.fxml"));
-			BorderPane root;		
-			root = loader.load();
-					
-			ChatViewController chatViewController = loader.getController();
-			chatViewController.setMainApp(mainApp);
-			chatViewController.establecerValores(modelFactoryController);
-		
-		//		Scene scene = btnIngresar.getScene();
-			Scene scene = new Scene(root);
-		//		AnchorPane loginView = (AnchorPane) scene.getRoot();
-		//		loginView.getChildren().add(root);
-			mainApp.getPrimaryStage().setScene(scene);
-		
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    void onBtnActualizarTarea(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onBtnDoc(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onBtnSend(ActionEvent event) {
+
     }
 	
 }
