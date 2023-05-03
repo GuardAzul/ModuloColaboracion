@@ -17,6 +17,20 @@ public class Domain {
 	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
 		return getEquipoPorId(idEquipo).getTareas();
 	}
+	
+	public Tarea getTareaPorIdYEquipo(String idTarea, int idEquipo) {
+		ArrayList<Tarea> equipos = getListaTareasPorEquipo(idEquipo);
+		Tarea tarea = null;
+		
+		for(Tarea t : equipos) {
+			if(t.getId() == idTarea || t.getId().equalsIgnoreCase(idTarea)) {
+				tarea = t;
+				break;
+			}
+		}
+		
+		return tarea;
+	}
 
 	
 	public Equipo getEquipoPorId(int idEquipo) {
@@ -31,6 +45,36 @@ public class Domain {
 		
 		return equipo;
 	}
+	
+	public Proyecto getProyecto(int idProyecto) {
+		Proyecto proyectoEncontrado = null;
+
+		for (Proyecto p : getListaProyectos()) {
+			if(p.getId() == idProyecto) {
+				proyectoEncontrado = p;
+				break;
+			}
+		}
+
+		return proyectoEncontrado;	
+	}
+	
+	
+	public boolean actualizarEstadoTarea(int idEquipo, String idTarea, EstadoTarea nuevoEstado) {
+		Boolean flagActualizada = false;
+		Equipo equipo = getEquipoPorId(idEquipo);
+		
+		if(equipo != null){
+			Tarea tarea = getTareaPorIdYEquipo(idTarea, idEquipo);
+			tarea.setEstado(nuevoEstado);
+			flagActualizada = true;
+		}			
+		else{
+			System.out.println("No se ha podido actualizar");
+		}
+		
+		return flagActualizada;
+	}		
 	
 	
 	// -------------------------- GETTERS Y SETTERS COMUNES --------------------------  

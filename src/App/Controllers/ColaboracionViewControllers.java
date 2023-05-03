@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import App.MainApp;
 import App.Model.EstadoTarea;
+import App.Model.Proyecto;
 import App.Model.Tarea;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -16,6 +17,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -52,6 +55,7 @@ public class ColaboracionViewControllers implements Initializable {
 
     private MainApp mainApp;
     ModelFactoryController modelFactoryController;
+    Proyecto proyectoAsignado; 
     Tarea tareaSeleccionada;
     ObservableList<Tarea> listaTareasData = FXCollections.observableArrayList();
     
@@ -60,19 +64,22 @@ public class ColaboracionViewControllers implements Initializable {
 		Platform.runLater(()->{
 			modelFactoryController = ModelFactoryController.getInstance();
 			inicializarVista();
-		});
-				
+		});				
 	}
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;		
 	}
 	
-	public void inicializarVista() {
+	public void inicializarVista() {		
+		// ---------------------------- INFO PROYECTO ----------------------------
+		proyectoAsignado = modelFactoryController.getProyecto(1); // 1 por que es el proyecto asignado al grupo de este usuario 1
+		lb_nomProyecto.setText(proyectoAsignado.getNombre());;
+	    lb_descProyecto.setText(proyectoAsignado.getDescripcion());;
+	    lb_estadoProyecto.setText(proyectoAsignado.getEstado().toString());;
 		
 		
-		
-// ---------------------------- TAB TAREAS ----------------------------
+		// ---------------------------- INFO TAREAS ----------------------------
 		cbEstadoTarea.getItems().clear();
 		cbEstadoTarea.getItems().addAll(EstadoTarea.values());
 		
@@ -113,7 +120,16 @@ public class ColaboracionViewControllers implements Initializable {
 	
 	@FXML
     void onBtnActualizarTarea(ActionEvent event) {
-		
+		int idEquipo = 1; // Equipo en el que está el usuario (Esto no se conoce, debe ser de otro modulo)
+		String idTarea = tareaSeleccionada.getId();
+		EstadoTarea nuevoEstado = cbEstadoTarea.getValue();
+		if (modelFactoryController.actualizarEstadoTarea(idEquipo, idTarea, nuevoEstado)) {
+			mostrarMensaje("Notificacion", "Tarea Actualizada", "La tarea ha sido actualizada con exito", AlertType.INFORMATION);
+			tablaTareas.refresh();
+		}			
+		else {
+			mostrarMensaje("Error", "Tarea No Actualizada", "La tarea NO ha sido actualizada con exito", AlertType.ERROR);
+		}					
     }
 
     @FXML
@@ -127,12 +143,24 @@ public class ColaboracionViewControllers implements Initializable {
     }
     
     
+    public void mostrarMensaje(String titulo, String header, String contenido, AlertType alertType){
+    	Alert alert = new Alert(alertType);
+    	alert.setTitle(titulo);
+    	alert.setHeaderText(header);
+    	alert.setContentText(contenido);
+    	alert.showAndWait();
+    }
+    
+    
 // Este metodo recibiría el usuario que está logueado (o el equipo), pero como 
 // no tenemos un Login no recibirá ningun parametro, por lo que la lista de tareas  
-// que retorne serán las tareas de un equipo aleatorio (en este caso el equipo 1)
+// que retorne serán las tareas de un equipo aleatorio (en este caso el equipo 1,
+// en el cual se encuentra el usuario 1)
     public ObservableList<Tarea> getTareasData(){
 		listaTareasData.addAll(modelFactoryController.getListaTareasPorEquipo(1)) ;
 		return listaTareasData;
 	}
+    
+    
 	
 }

@@ -100,6 +100,8 @@ public class ModelFactoryController {
 		equipo.setNombre("Equipo 1");
 		equipo.setEstado(EstadoEquipo.LIBRE);	
 			ArrayList<Tarea> tareas = new ArrayList<>();
+			
+			// TODO: NO CARGAN LA DESCRIPCION DE LAS TAREAS 
 			tareas.add(new Tarea("1", "Crear planos arquitectonicos", "hagan los planos esos", EstadoTarea.SIN_INICIAR));
 			tareas.add(new Tarea("2", "Contratar constructores", "llamen a los muchachos", EstadoTarea.SIN_INICIAR));
 		equipo.setTareas(tareas);
@@ -168,5 +170,14 @@ public class ModelFactoryController {
 	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
 		return domain.getListaTareasPorEquipo(idEquipo);
 	}
+	
+	public Proyecto getProyecto(int idProyecto) {
+		return domain.getProyecto(idProyecto);
+	}
+	
+	public boolean actualizarEstadoTarea(int idEquipo, String idTarea, EstadoTarea nuevoEstado){
+		return domain.actualizarEstadoTarea(idEquipo, idTarea, nuevoEstado);
+	}
+	
 		
 }

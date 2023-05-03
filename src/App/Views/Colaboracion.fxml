@@ -39,7 +39,7 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lb_descProyecto" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="133.0" layoutY="56.0" prefHeight="75.0" prefWidth="335.0" style="-fx-background-color: d1dbd0;" text="asd" wrapText="true">
+                        <Label fx:id="lb_descProyecto" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="133.0" layoutY="56.0" prefHeight="75.0" prefWidth="335.0" style="-fx-background-color: d1dbd0;" wrapText="true">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -76,7 +76,7 @@
                            </cursor>
                         </Button>
                         <ComboBox fx:id="cbEstadoTarea" layoutX="405.0" layoutY="373.0" opacity="0.88" prefHeight="25.0" prefWidth="203.0" promptText="Estado de la tarea" />
-                        <Label fx:id="lb_descTarea" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="405.0" layoutY="206.0" prefHeight="156.0" prefWidth="213.0" style="-fx-background-color: d1dbd0;" text="asd" wrapText="true">
+                        <Label fx:id="lb_descTarea" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="405.0" layoutY="206.0" prefHeight="156.0" prefWidth="213.0" style="-fx-background-color: d1dbd0;" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>
