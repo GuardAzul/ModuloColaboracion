@@ -163,5 +163,10 @@ public class ModelFactoryController {
 		
 		System.out.println("---Datos Creados---");
 	}
+	
+	
+	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
+		return domain.getListaTareasPorEquipo(idEquipo);
+	}
 		
 }

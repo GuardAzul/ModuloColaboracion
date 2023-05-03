@@ -14,6 +14,26 @@ public class Domain {
 	}
 
 	
+	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
+		return getEquipoPorId(idEquipo).getTareas();
+	}
+
+	
+	public Equipo getEquipoPorId(int idEquipo) {
+		Equipo equipo = null;
+		
+		for(Equipo e: getListaEquipos()){
+			if(e.getId() == idEquipo){
+				equipo = e;
+				break;
+			}
+		}
+		
+		return equipo;
+	}
+	
+	
+	// -------------------------- GETTERS Y SETTERS COMUNES --------------------------  
 	public ArrayList<Persona> getListaPersonas() {
 		return listaPersonas;
 	}

@@ -5,6 +5,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import App.MainApp;
+import App.Model.EstadoTarea;
+import App.Model.Tarea;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +25,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -29,12 +35,12 @@ public class ColaboracionViewControllers implements Initializable {
     @FXML private Label lb_nomProyecto;
     @FXML private Label lb_descProyecto;
     @FXML private Label lb_estadoProyecto;
-    @FXML private TableView<?> tablaTareas;
-    @FXML private TableColumn<?, ?> col_IdTarea;
-    @FXML private TableColumn<?, ?> col_Tarea;
-    @FXML private TableColumn<?, ?> col_EstadoTarea;
+    @FXML private TableView<Tarea> tablaTareas;
+    @FXML private TableColumn<Tarea, String> col_IdTarea;
+    @FXML private TableColumn<Tarea, String> col_Tarea;
+    @FXML private TableColumn<Tarea, String> col_EstadoTarea;
     @FXML private Button BtnActualizarVendedor;
-    @FXML private ComboBox<?> cbEstadoTarea;
+    @FXML private ComboBox<EstadoTarea> cbEstadoTarea;
     @FXML private Label lb_descTarea;
     
     @FXML private HBox onlineUsersHbox;
@@ -46,21 +52,68 @@ public class ColaboracionViewControllers implements Initializable {
 
     private MainApp mainApp;
     ModelFactoryController modelFactoryController;
+    Tarea tareaSeleccionada;
+    ObservableList<Tarea> listaTareasData = FXCollections.observableArrayList();
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		modelFactoryController = ModelFactoryController.getInstance();		
+		Platform.runLater(()->{
+			modelFactoryController = ModelFactoryController.getInstance();
+			inicializarVista();
+		});
+				
 	}
-
 	
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;		
 	}
 	
+	public void inicializarVista() {
+		
+		
+		
+// ---------------------------- TAB TAREAS ----------------------------
+		cbEstadoTarea.getItems().clear();
+		cbEstadoTarea.getItems().addAll(EstadoTarea.values());
+		
+		col_IdTarea.setCellValueFactory(new PropertyValueFactory<>("id"));
+		col_Tarea.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+		col_EstadoTarea.setCellValueFactory(new PropertyValueFactory<>("estado"));		
+		 
+		limpiarCampos();
+		
+		// Añade los datos de la lista observable a la tabla
+		// Esa lista se obtiene del modelFactoryController
+		tablaTareas.setItems(getTareasData());
+		
+		// Acción de la tabla para mostrar informacion de un empleado
+		tablaTareas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+			tareaSeleccionada = newSelection;			
+			
+			mostrarInformacionTarea();
+		});
+	}
+	
+	private void mostrarInformacionTarea() {
+		if(tareaSeleccionada != null){
+			lb_descTarea.setText(tareaSeleccionada.getDescripción());
+		    cbEstadoTarea.getSelectionModel().select(tareaSeleccionada.getEstado());
+		}	
+	}
+	
+	
+	public void limpiarCampos() {
+		// Limpio los textfield y combobox
+		lb_descProyecto.setText("");		
+		cbEstadoTarea.getSelectionModel().clearSelection();		
+		
+		tablaTareas.getSelectionModel().clearSelection();		
+    }
+	
 	
 	@FXML
     void onBtnActualizarTarea(ActionEvent event) {
-
+		
     }
 
     @FXML
@@ -72,5 +125,14 @@ public class ColaboracionViewControllers implements Initializable {
     void onBtnSend(ActionEvent event) {
 
     }
+    
+    
+// Este metodo recibiría el usuario que está logueado (o el equipo), pero como 
+// no tenemos un Login no recibirá ningun parametro, por lo que la lista de tareas  
+// que retorne serán las tareas de un equipo aleatorio (en este caso el equipo 1)
+    public ObservableList<Tarea> getTareasData(){
+		listaTareasData.addAll(modelFactoryController.getListaTareasPorEquipo(1)) ;
+		return listaTareasData;
+	}
 	
 }
