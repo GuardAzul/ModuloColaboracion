@@ -1,5 +1,7 @@
 package App.Controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +33,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 
 public class ColaboracionViewControllers implements Initializable {
 
@@ -133,15 +136,63 @@ public class ColaboracionViewControllers implements Initializable {
 		}					
     }
 
-    @FXML
-    void onBtnDoc(ActionEvent event) {
-
-    }
 
     @FXML
     void onBtnSend(ActionEvent event) {
 
     }
+    
+    @FXML
+    void onBtnDoc(ActionEvent event) {
+    	subirImagen();
+    }
+    
+    public void subirImagen(){
+		// File chooser que solo permita subir archivos de tal tipo (segun requisitos)
+		FileChooser fileChooser = new FileChooser();
+	    FileChooser.ExtensionFilter ext1 = new FileChooser.ExtensionFilter("JPG files(*.jpg)","*.JPG");
+    	FileChooser.ExtensionFilter ext2 = new FileChooser.ExtensionFilter("PNG files(*.png)","*.PNG");
+    	FileChooser.ExtensionFilter ext3 = new FileChooser.ExtensionFilter("PDF files(*.pdf)","*.PDF");
+    	FileChooser.ExtensionFilter ext4 = new FileChooser.ExtensionFilter("DOCX files(*.docx)",".DOCX");
+    	FileChooser.ExtensionFilter ext5 = new FileChooser.ExtensionFilter("PPTX files(*.pptx)",".pptx");
+    	FileChooser.ExtensionFilter ext6 = new FileChooser.ExtensionFilter("XLS files(*.xls)",".xls");
+    	FileChooser.ExtensionFilter ext7 = new FileChooser.ExtensionFilter("TXT files(*.txt)",".txt");
+    																	   
+    	fileChooser.getExtensionFilters().addAll(ext1, ext2, ext3, ext4, ext5, ext6, ext7);
+    	
+    	File archivoSeleccionado = fileChooser.showOpenDialog(null);
+    	
+//    	try {    		        		
+//	    	BufferedImage bf;	
+//	    	
+//	    	if(archivoSeleccionado != null){
+//	    		// Leo la imagen para luego mostrarla en el ImageView
+//				bf = ImageIO.read(archivoSeleccionado);
+//				
+//	    		Imageimagen = SwingFXUtils.toFXImage(bf, null);
+//	    		imagenViewProducto.setImage(imagen);    	   
+//	    		
+//	    		// Hacer una copia de la imagen porque la imagen le pertenece a la ruta especifica del usuario
+//	    		// Y guardo la nueva ruta para asignarsela al producto
+//	    		if(productoSeleccionado != null){
+//	    			rutaImagenProductoSeleccionado = crudVendedorViewController.copiarImagen(productoSeleccionado.getNombre(),
+//																		    				 archivoSeleccionado.getAbsolutePath());    	    		    	    			   
+//	    		} 
+//	    		else{ // Esto me permite guardar la imagen de un nuevo producto sin hacer seleccion en la tabla 
+//	    			rutaImagenNuevoProducto = crudVendedorViewController.copiarImagen(txtNombreProducto.getText(),
+//		    				 														  archivoSeleccionado.getAbsolutePath());
+//	    		}
+//	    	
+//	    	}
+//	    	else{
+//	    		mostrarMensaje("Notifacion", "Archivo NO valido", "El archivo no ha sido encontrado", AlertType.ERROR);
+//	    	}
+//    	} catch (IOException e) {
+//			e.printStackTrace();
+//		}	
+    	
+    }
+    
     
     
     public void mostrarMensaje(String titulo, String header, String contenido, AlertType alertType){
