@@ -97,8 +97,11 @@ public class ModelFactoryController {
 		Equipo equipo = new Equipo();
 		equipo.setId(1);
 		equipo.setNombre("Equipo 1");
-		equipo.setEstado(EstadoEquipo.LIBRE);
-		equipo.setTareas(null);
+		equipo.setEstado(EstadoEquipo.LIBRE);	
+			ArrayList<Tarea> tareas = new ArrayList<>();
+			tareas.add(new Tarea("1", "Crear planos arquitectonicos", "hagan los planos esos"));
+			tareas.add(new Tarea("2", "Contratar constructores", "llamen a los muchachos"));
+		equipo.setTareas(tareas);
 			ArrayList<Persona> integrantes = new ArrayList<>();
 			integrantes.add(domain.getListaPersonas().get(0));
 			integrantes.add(domain.getListaPersonas().get(1));		
@@ -110,7 +113,10 @@ public class ModelFactoryController {
 		equipo.setId(2);
 		equipo.setNombre("Equipo 2");
 		equipo.setEstado(EstadoEquipo.LIBRE);
-		equipo.setTareas(null);
+			tareas = new ArrayList<>();
+			tareas.add(new Tarea("3", "Crear infraestructura de red", "ya saben que hacer"));
+			tareas.add(new Tarea("4", "Obtener certificado Uso de Suelos", "los suelos están bien?"));
+		equipo.setTareas(tareas);
 			integrantes = new ArrayList<>();
 			integrantes.add(domain.getListaPersonas().get(1));
 			integrantes.add(domain.getListaPersonas().get(2));		
@@ -122,7 +128,10 @@ public class ModelFactoryController {
 		equipo.setId(3);
 		equipo.setNombre("Equipo 3");
 		equipo.setEstado(EstadoEquipo.OCUPADO);
-		equipo.setTareas(null);
+			tareas = new ArrayList<>();
+			tareas.add(new Tarea("5", "Obtener planos carretera", "no estan los planos?"));
+			tareas.add(new Tarea("6", "Comprar material", "busquen el cemento mas barato"));
+		equipo.setTareas(tareas);	
 			integrantes = new ArrayList<>();
 			integrantes.add(domain.getListaPersonas().get(2));
 			integrantes.add(domain.getListaPersonas().get(0));		
@@ -150,6 +159,8 @@ public class ModelFactoryController {
 		reunion.setIntegrantes(reu_int);
 		domain.getListaReuniones().add(reunion);
 		
+		
+		System.out.println("---Datos Creados---");
 	}
 		
 }

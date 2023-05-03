@@ -2,6 +2,7 @@ package App;
 import java.io.IOException;
 
 import App.Controllers.ColaboracionViewControllers;
+import App.Controllers.ModelFactoryController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,21 +15,14 @@ public class MainApp extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 
-//	ModelFactoryController modelFactoryController;
-//	Marketplace marketplace;
-//	Usuario usuarioLogeado;
-//	Vendedor vendedorSeleccionadoGeneral;
+	ModelFactoryController modelFactoryController;
+//	Domain domain;	
 
 
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Modulo Colaboracion");
-//		this.vendedorSeleccionadoGeneral = null;
-		
-		// Put an icon
-		// Image icon = new Image("icon.png");
-		// primaryStage.getIcons().add(icon);
 		
 		initRootLayout();
 	}
@@ -70,24 +64,6 @@ public class MainApp extends Application {
 	public BorderPane getRootLayout() {
 		return rootLayout;
 	}
-	
-
-//	public Vendedor getVendedorSeleccionadoGeneral() {
-//		return vendedorSeleccionadoGeneral;
-//	}
-//
-//	public void setVendedorSeleccionadoGeneral(Vendedor vendedorSeleccionadoGeneral) {
-//		this.vendedorSeleccionadoGeneral = vendedorSeleccionadoGeneral;
-//	}
-//	
-//	public Usuario getUsuarioLogeado() {
-//		return usuarioLogeado;
-//	}
-//
-//	public void setUsuarioLogeado(Usuario usuarioLogeado) {
-//		this.usuarioLogeado = usuarioLogeado;
-//	}
-	
 	
 
 	public static void main(String[] args) {
