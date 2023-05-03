@@ -74,9 +74,9 @@ public class ColaboracionViewControllers implements Initializable {
 	public void inicializarVista() {		
 		// ---------------------------- INFO PROYECTO ----------------------------
 		proyectoAsignado = modelFactoryController.getProyecto(1); // 1 por que es el proyecto asignado al grupo de este usuario 1
-		lb_nomProyecto.setText(proyectoAsignado.getNombre());;
-	    lb_descProyecto.setText(proyectoAsignado.getDescripcion());;
-	    lb_estadoProyecto.setText(proyectoAsignado.getEstado().toString());;
+		lb_nomProyecto.setText(proyectoAsignado.getNombre());
+	    lb_descProyecto.setText(proyectoAsignado.getDescripcion());
+	    lb_estadoProyecto.setText(proyectoAsignado.getEstado().toString());
 		
 		
 		// ---------------------------- INFO TAREAS ----------------------------
@@ -111,7 +111,7 @@ public class ColaboracionViewControllers implements Initializable {
 	
 	public void limpiarCampos() {
 		// Limpio los textfield y combobox
-		lb_descProyecto.setText("");		
+		lb_descTarea.setText("");		
 		cbEstadoTarea.getSelectionModel().clearSelection();		
 		
 		tablaTareas.getSelectionModel().clearSelection();		

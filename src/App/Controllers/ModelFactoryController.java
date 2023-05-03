@@ -100,10 +100,10 @@ public class ModelFactoryController {
 		equipo.setNombre("Equipo 1");
 		equipo.setEstado(EstadoEquipo.LIBRE);	
 			ArrayList<Tarea> tareas = new ArrayList<>();
-			
-			// TODO: NO CARGAN LA DESCRIPCION DE LAS TAREAS 
-			tareas.add(new Tarea("1", "Crear planos arquitectonicos", "hagan los planos esos", EstadoTarea.SIN_INICIAR));
-			tareas.add(new Tarea("2", "Contratar constructores", "llamen a los muchachos", EstadoTarea.SIN_INICIAR));
+			tareas.add(new Tarea("1", "Estudio de viabilidad y planificación", "Realizar un análisis exhaustivo del terreno, condiciones climáticas y de tráfico para determinar la viabilidad del proyecto", EstadoTarea.SIN_INICIAR));		
+			tareas.add(new Tarea("2", "Diseño estructural del puente", "Realizar el diseño de la estructura del puente, incluyendo los materiales y tecnologías a utilizar", EstadoTarea.SIN_INICIAR));
+			tareas.add(new Tarea("3", "Adquisición y transporte de materiales", "Adquirir los materiales necesarios para la construcción del puente", EstadoTarea.EN_PROCESO));
+			tareas.add(new Tarea("4", "Pruebas y evaluaciones", "Realizar pruebas y evaluaciones rigurosas para garantizar que el puente cumple con los estándares de calidad y seguridad aplicables", EstadoTarea.TERMINADO));
 		equipo.setTareas(tareas);
 			ArrayList<Persona> integrantes = new ArrayList<>();
 			integrantes.add(domain.getListaPersonas().get(0));

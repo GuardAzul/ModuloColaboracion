@@ -62,9 +62,9 @@
                         </Label>
                         <TableView fx:id="tablaTareas" layoutX="14.0" layoutY="187.0" prefHeight="251.0" prefWidth="373.0">
                            <columns>
-                              <TableColumn fx:id="col_IdTarea" prefWidth="68.66665649414062" text="Id" />
-                              <TableColumn fx:id="col_Tarea" prefWidth="178.66668701171875" text="Tarea" />
-                              <TableColumn fx:id="col_EstadoTarea" prefWidth="183.0" text="Estado" />
+                              <TableColumn fx:id="col_IdTarea" prefWidth="55.0" resizable="false" text="Id" />
+                              <TableColumn fx:id="col_Tarea" prefWidth="215.0" resizable="false" text="Tarea" />
+                              <TableColumn fx:id="col_EstadoTarea" prefWidth="100.0" resizable="false" text="Estado" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
