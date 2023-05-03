@@ -1,9 +1,11 @@
 package App.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Equipo {
-	
+public class Equipo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
 	private EstadoEquipo estado;
@@ -11,20 +13,12 @@ public class Equipo {
 	private ArrayList<Persona> integrantes;
 	private Proyecto proyecto;
 	
-	/**
-	 * Constructor vacío
-	 */
+	
 	public Equipo() {
 		super();
 	}
 	
-	/**
-	 * Constructor
-	 * @param id
-	 * @param nombre
-	 * @param estado
-	 * @param tareas
-	 */
+	
 	public Equipo(int id, String nombre, EstadoEquipo estado, ArrayList<Tarea> tareas, 
 			ArrayList<Persona> integrantes, Proyecto proyecto) {
 		super();
@@ -90,9 +84,5 @@ public class Equipo {
 	public String toString() {
 		return "Equipo [id=" + id + ", nombre=" + nombre + ", estado=" + estado + "]";
 	}
-	
-	
-	
-	
 
 }

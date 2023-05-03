@@ -1,26 +1,19 @@
 package App.Model;
 
-public class Proyecto {
+import java.io.Serializable;
 
+public class Proyecto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String descripcion;
 	private EstadoProyecto estado;
 	private String nombre;
 	
-	/**
-	 * Constructor
-	 */
 	public Proyecto() {
 		super();
 	}
 
-	/**
-	 * Constructor
-	 * @param id
-	 * @param descripcion
-	 * @param estado
-	 * @param nombre
-	 */
 	public Proyecto(int id, String descripcion, EstadoProyecto estado, String nombre) {
 		super();
 		this.id = id;
@@ -67,8 +60,5 @@ public class Proyecto {
 		return "Proyecto [id=" + id + ", descripcion=" + descripcion + ", estado=" + estado + ", nombre=" + nombre
 				+ "]";
 	}
-	
-	
-	
 	
 }

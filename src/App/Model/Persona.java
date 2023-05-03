@@ -1,34 +1,23 @@
 package App.Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Persona {
+public class Persona implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String nombre;
 	private String apellido;
 	private LocalDate fechaNacimiento;
 	private ArrayList<Documento> documentos;
 	private ArrayList<Mensaje> mensajes;
-	
-	/**
-	 * Constructor vacío
-	 */
+
 	public Persona() {
 		super();
 	}
 
-
-	/**
-	 * Constructor con parametros
-	 * @param id
-	 * @param nombre
-	 * @param apellido
-	 * @param fechaNacimiento
-	 * @param documentos
-	 * @param mensajes
-	 */
 	public Persona(int id, String nombre, String apellido, LocalDate fechaNacimiento, ArrayList<Documento> documentos,
 			ArrayList<Mensaje> mensajes) {
 		super();
@@ -90,16 +79,10 @@ public class Persona {
 		this.mensajes = mensajes;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
 				+ fechaNacimiento + "]";
 	}
-	
-	
-	
-	
-	
-	
+
 }

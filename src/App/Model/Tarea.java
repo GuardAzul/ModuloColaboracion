@@ -1,26 +1,19 @@
 package App.Model;
 
-public class Tarea {
+import java.io.Serializable;
 
+public class Tarea implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String nombre;
 	private String descripción;
 	private EstadoTarea estado;
 	
-	/**
-	 * Constructor
-	 */
 	public Tarea() {
 		super();
 	}
 
-	/**
-	 * Constructor
-	 * @param id
-	 * @param nombre
-	 * @param descripción
-	 * @param estado
-	 */
 	public Tarea(String id, String nombre, String descripción, EstadoTarea estado) {
 		super();
 		this.id = id;
@@ -66,6 +59,5 @@ public class Tarea {
 	public String toString() {
 		return "Tarea [id=" + id + ", nombre=" + nombre + ", descripción=" + descripción + ", estado=" + estado + "]";
 	}
-	
 	
 }

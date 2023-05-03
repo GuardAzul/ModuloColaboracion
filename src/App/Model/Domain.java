@@ -1,9 +1,11 @@
 package App.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Domain {
-
+public class Domain implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	ArrayList<Persona> listaPersonas = new ArrayList<>();
 	ArrayList<Equipo> listaEquipos = new ArrayList<>();
 	ArrayList<Proyecto> listaProyectos = new ArrayList<>();

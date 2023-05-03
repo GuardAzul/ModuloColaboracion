@@ -1,5 +1,7 @@
 package App.Model;
 
-public enum EstadoEquipo {
+import java.io.Serializable;
+
+public enum EstadoEquipo implements Serializable {
 	OCUPADO, LIBRE
 }

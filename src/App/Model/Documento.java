@@ -1,24 +1,20 @@
 package App.Model;
 
-public class Documento {
+import java.io.Serializable;
 
+public class Documento implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String nombre;
 	private String contenido;
 	
-	/**
-	 * Constructor vacío
-	 */
+
 	public Documento() {
 		super();
 	}
 
-	/**
-	 * Constructor
-	 * @param id
-	 * @param nombre
-	 * @param contenido
-	 */
+	
 	public Documento(String id, String nombre, String contenido) {
 		super();
 		this.id = id;

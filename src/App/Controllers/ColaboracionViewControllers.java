@@ -125,6 +125,7 @@ public class ColaboracionViewControllers implements Initializable {
 		EstadoTarea nuevoEstado = cbEstadoTarea.getValue();
 		if (modelFactoryController.actualizarEstadoTarea(idEquipo, idTarea, nuevoEstado)) {
 			mostrarMensaje("Notificacion", "Tarea Actualizada", "La tarea ha sido actualizada con exito", AlertType.INFORMATION);
+			modelFactoryController.guardarResourceBinario();
 			tablaTareas.refresh();
 		}			
 		else {

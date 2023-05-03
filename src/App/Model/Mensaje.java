@@ -1,22 +1,17 @@
 package App.Model;
 
-public class Mensaje {
+import java.io.Serializable;
 
+public class Mensaje implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private String id;
 	private String contenido;
 	
-	/**
-	 * Constructor vacío
-	 */
 	public Mensaje() {
 		super();
 	}
 
-	/**
-	 * Constructor
-	 * @param id
-	 * @param contenido
-	 */
 	public Mensaje(String id, String contenido) {
 		super();
 		this.id = id;
@@ -44,8 +39,5 @@ public class Mensaje {
 	public String toString() {
 		return "Mensaje [id=" + id + ", contenido=" + contenido + "]";
 	}
-	
-	
-	
-	
+
 }

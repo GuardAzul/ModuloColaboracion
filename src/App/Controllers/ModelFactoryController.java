@@ -14,6 +14,7 @@ import App.Model.Persona;
 import App.Model.Proyecto;
 import App.Model.Reunion;
 import App.Model.Tarea;
+import App.Persistence.Persistencia;
 
 public class ModelFactoryController {
 
@@ -35,9 +36,11 @@ public class ModelFactoryController {
 	public ModelFactoryController() {
 		if(domain == null){
 			System.out.println("DOMAIN ES NULL");
-			inicializarDatos();
-//			guardarResourceSerializable();
-//			guardarResourceXML();
+			
+//			inicializarDatos();			
+//			guardarResourceBinario();
+			
+			cargarResourceBinario();
 		}
 	}
 		
@@ -180,4 +183,15 @@ public class ModelFactoryController {
 	}
 	
 		
+	
+	
+	// PERSISTENCIA 
+	
+	public void cargarResourceBinario(){
+		domain = Persistencia.cargarRecursoDomainBinario();
+	}
+	
+	public void guardarResourceBinario(){
+		Persistencia.guardarRecursoDomainBinario(domain);
+	}
 }
