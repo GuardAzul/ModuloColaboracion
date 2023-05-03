@@ -2,5 +2,5 @@ package App.Model;
 
 public enum EstadoProyecto {
 
-	OCUPADO, LIBRE
+	EN_PROCESO, INICIADO, TERMINADO
 }

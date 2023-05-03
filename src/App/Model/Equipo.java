@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Equipo {
 	
-	private String id;
+	private int id;
 	private String nombre;
 	private EstadoEquipo estado;
 	private ArrayList<Tarea> tareas;
@@ -25,7 +25,7 @@ public class Equipo {
 	 * @param estado
 	 * @param tareas
 	 */
-	public Equipo(String id, String nombre, EstadoEquipo estado, ArrayList<Tarea> tareas, 
+	public Equipo(int id, String nombre, EstadoEquipo estado, ArrayList<Tarea> tareas, 
 			ArrayList<Persona> integrantes, Proyecto proyecto) {
 		super();
 		this.id = id;
@@ -37,11 +37,11 @@ public class Equipo {
 	}
 
 	//-------------------------------------getters y setters-----------------------------------------
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

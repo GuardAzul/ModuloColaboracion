@@ -2,7 +2,7 @@ package App.Model;
 
 public class Proyecto {
 
-	private String id;
+	private int id;
 	private String descripcion;
 	private EstadoProyecto estado;
 	private String nombre;
@@ -21,7 +21,7 @@ public class Proyecto {
 	 * @param estado
 	 * @param nombre
 	 */
-	public Proyecto(String id, String descripcion, EstadoProyecto estado, String nombre) {
+	public Proyecto(int id, String descripcion, EstadoProyecto estado, String nombre) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
@@ -30,11 +30,11 @@ public class Proyecto {
 	}
 
 	//-------------------------------Getters y Setter----------------------------------------------
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

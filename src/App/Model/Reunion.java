@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Reunion {
 
-	private String id;
+	private int id;
 	private String motivo;
 	private ArrayList<Equipo> integrantes;
 	
@@ -23,7 +23,7 @@ public class Reunion {
 	 * @param motivo
 	 * @param integrantes
 	 */
-	public Reunion(String id, String motivo, ArrayList<Equipo> integrantes) {
+	public Reunion(int id, String motivo, ArrayList<Equipo> integrantes) {
 		super();
 		this.id = id;
 		this.motivo = motivo;
@@ -32,12 +32,12 @@ public class Reunion {
 
 
 //-------------------------------------Getters y Setters--------------------------------------------------------
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
