@@ -18,11 +18,12 @@ import App.Model.Domain;
 
 public class Persistencia {
 
-	//	public static final String RUTA_ARCHIVO_LOG = "src/resources/MarketplaceLog.txt";
+//	public static final String RUTA_ARCHIVO_LOG = "src/resources/MarketplaceLog.txt";
+//	public static final String RUTA_ARCHIVO_DOMAIN_BINARIO_2 = "D:/IdeaProjects/ModuloColaboracion/resources/model.dat";
+//	public static final String RUTA_ARCHIVO_DOMAIN_BINARIO_3 = "D:/DATOS/model.dat";
 
-	// RUTAS ABSOLUTAS
-	public static final String RUTA_ARCHIVO_DOMAIN_BINARIO = "D:/IdeaProjects/ModuloColaboracion/resources/model.dat";
-	public static final String RUTA_ARCHIVO_DOMAIN_BINARIO_2 = "D:/DATOS/model.dat";
+	// RUTAS
+	public static final String RUTA_ARCHIVO_DOMAIN_BINARIO = "src/resources/model.dat";
 
 	
 	//------------------------------------SERIALIZACIÓN  y XML
