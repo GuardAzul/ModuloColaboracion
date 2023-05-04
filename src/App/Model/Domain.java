@@ -10,12 +10,15 @@ public class Domain implements Serializable {
 	ArrayList<Equipo> listaEquipos = new ArrayList<>();
 	ArrayList<Proyecto> listaProyectos = new ArrayList<>();
 	ArrayList<Reunion> listaReuniones = new ArrayList<>();
+	static ArrayList<Documento> documentos = new ArrayList<> ();
 	
 	public Domain() {
 		
 	}
 
 	
+
+
 	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
 		return getEquipoPorId(idEquipo).getTareas();
 	}
@@ -103,6 +106,21 @@ public class Domain implements Serializable {
 	}
 	
 	
+	public static void agregarDocumento(Documento documento) {
+        documentos.add(documento);
+    }
+
+    public void removerDocumento(Documento documento) {
+        documentos.remove(documento);
+    }
+    
+    
+    public static ArrayList<Documento> obtenerDocumentos() {
+        return documentos;
+    }
+    
+    
+	
 	// -------------------------- GETTERS Y SETTERS COMUNES --------------------------  
 	public ArrayList<Persona> getListaPersonas() {
 		return listaPersonas;
@@ -136,4 +154,14 @@ public class Domain implements Serializable {
 		this.listaReuniones = listaReuniones;
 	}
 
+	
+
+	public static ArrayList<Documento> getDocumentos() {
+		return documentos;
+	}
+
+
+	public static void setDocumentos(ArrayList<Documento> documentos) {
+		Domain.documentos = documentos;
+	}
 }

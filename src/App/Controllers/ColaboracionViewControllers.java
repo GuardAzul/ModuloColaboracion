@@ -1,13 +1,19 @@
 package App.Controllers;
 
 import java.awt.image.BufferedImage;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import App.MainApp;
+import App.Model.Documento;
+import App.Model.Domain;
 import App.Model.EstadoTarea;
 import App.Model.Mensaje;
 import App.Model.Persona;
@@ -196,8 +202,14 @@ public class ColaboracionViewControllers implements Initializable {
     																	   
     	fileChooser.getExtensionFilters().addAll(ext1, ext2, ext3, ext4, ext5, ext6, ext7);
     	
-    	File archivoSeleccionado = fileChooser.showOpenDialog(null);
+    	File archivoSeleccionado = fileChooser.showOpenDialog( this.BtnActualizarVendedor.getScene().getWindow() );
     	
+    	System.out.println(archivoSeleccionado.getName());
+
+    	txt_mensajes.appendText("\n"+archivoSeleccionado.getName());
+    	Mensaje nombreDoc = new Mensaje("\n"+messageBox.getText()+archivoSeleccionado.getName());
+    	
+    	modelFactoryController.agregarMensaje(usuario.getId(), nombreDoc);
 //    	try {    		        		
 //	    	BufferedImage bf;	
 //	    	
@@ -249,6 +261,67 @@ public class ColaboracionViewControllers implements Initializable {
 		return listaTareasData;
 	}
     
-    
+  /*  
+    @FXML
+    void onBtnDoc(ActionEvent event) {
+    	enviarDocumento();
+    }
+  */
+
+//    @FXML
+//    void enviarDocumento() {
+//        // Crear un objeto FileChooser para permitir al usuario seleccionar el archivo a cargar
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Seleccionar documento");
+//        File file = fileChooser.showOpenDialog(null);
+//
+//        if (file != null) {
+//            // Leer el contenido del archivo
+//            String contenido = null;
+//            try {
+//                contenido = new String(Files.readAllBytes(file.toPath()));
+//            } catch (IOException e) {
+//                // Manejar cualquier excepción de lectura de archivo aquí
+//                e.printStackTrace();
+//            }
+//
+//           
+//
+//            // Enviar el documento a los demás miembros del equipo utilizando un método de comunicación
+//            // como un socket o un servicio web
+//            // ...
+//            // Obtener el documento seleccionado   // Crear un nuevo objeto Documento con el nombre y contenido del archivo cargado
+//            Documento documento = new Documento( file.getName(), contenido);
+//
+//                    // Agregar el documento a la lista de documentos colaborativos
+//                    Domain.agregarDocumento(documento);// Código para obtener el documento seleccionado
+//
+//            // Establecer la conexión con el servidor
+//            try (Socket socket = new Socket("localhost",1056)) {
+//                // Obtener el OutputStream de la conexión
+//                OutputStream outputStream = socket.getOutputStream();
+//
+//                // Escribir los datos del documento en el OutputStream
+//                DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+//                dataOutputStream.writeUTF(documento.getNombre()); // Escribir el nombre del documento
+//                dataOutputStream.writeUTF(documento.getContenido()); // Escribir el contenido del documento
+//
+//                // Cerrar el OutputStream y la conexión
+//                outputStream.close();
+//            } catch (IOException e) {
+//                // Manejar el error de conexión
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        }
+    }
+
 	
-}
+    
+    
+    
+   
+    	
+       
+

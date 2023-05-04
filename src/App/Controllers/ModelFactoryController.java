@@ -194,6 +194,14 @@ public class ModelFactoryController {
 		return domain.agregarMensaje(idPersona, mensaje);
 	}
 	
+
+	public ArrayList<Documento> listaDocumentos = Domain.obtenerDocumentos();
+
+	
+	
+	
+	
+	
 	// PERSISTENCIA 
 	
 	public void cargarResourceBinario(){
