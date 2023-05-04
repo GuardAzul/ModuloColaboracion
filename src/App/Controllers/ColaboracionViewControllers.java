@@ -4,10 +4,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import App.MainApp;
 import App.Model.EstadoTarea;
+import App.Model.Mensaje;
+import App.Model.Persona;
 import App.Model.Proyecto;
 import App.Model.Tarea;
 import javafx.application.Platform;
@@ -50,8 +53,8 @@ public class ColaboracionViewControllers implements Initializable {
     @FXML private Label lb_descTarea;
     
     @FXML private HBox onlineUsersHbox;
-    @FXML private ListView<?> userList;
-    @FXML private ListView<?> chatPane;
+    @FXML private Label lb_usuario_amigo;
+    @FXML private TextArea txt_mensajes;
     @FXML private TextArea messageBox;
     @FXML private Button btnSend;
     @FXML private Button btnDoc;
@@ -60,6 +63,7 @@ public class ColaboracionViewControllers implements Initializable {
     ModelFactoryController modelFactoryController;
     Proyecto proyectoAsignado; 
     Tarea tareaSeleccionada;
+    Persona usuario;
     ObservableList<Tarea> listaTareasData = FXCollections.observableArrayList();
     
 	@Override
@@ -102,6 +106,20 @@ public class ColaboracionViewControllers implements Initializable {
 			
 			mostrarInformacionTarea();
 		});
+		
+		inicializarChat();
+	}
+	
+	private void inicializarChat() {
+		// ---------------------------- INFO CHAT ----------------------------
+		Persona amigo = modelFactoryController.getPersonaPorId(2);
+		System.out.println("amigo: "+amigo.getNombre()+" id: "+amigo.getId());
+		lb_usuario_amigo.setText(amigo.getNombre());
+		
+		usuario = modelFactoryController.getPersonaPorId(1);
+		
+		cargarMensajesChat(usuario);
+		
 	}
 	
 	private void mostrarInformacionTarea() {
@@ -109,6 +127,20 @@ public class ColaboracionViewControllers implements Initializable {
 			lb_descTarea.setText(tareaSeleccionada.getDescripción());
 		    cbEstadoTarea.getSelectionModel().select(tareaSeleccionada.getEstado());
 		}	
+	}
+	
+	private void cargarMensajesChat(Persona pers) {
+		ArrayList<Mensaje> mensajes = pers.getMensajes();		
+		
+		try {
+			for(Mensaje m : mensajes) {
+				txt_mensajes.appendText(m.getContenido());
+			}	
+		}
+		catch(NullPointerException e) {
+			System.out.println("No hay mensajes");
+		}
+		
 	}
 	
 	
@@ -139,7 +171,11 @@ public class ColaboracionViewControllers implements Initializable {
 
     @FXML
     void onBtnSend(ActionEvent event) {
-
+    	txt_mensajes.appendText("\n"+messageBox.getText());
+    	Mensaje nuevoMensaje = new Mensaje("\n"+messageBox.getText());
+    	
+    	modelFactoryController.agregarMensaje(usuario.getId(), nuevoMensaje);
+    	modelFactoryController.guardarResourceBinario();
     }
     
     @FXML

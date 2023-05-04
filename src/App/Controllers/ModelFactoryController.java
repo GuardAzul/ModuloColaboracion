@@ -55,7 +55,9 @@ public class ModelFactoryController {
 		persona.setApellido("Rodriguez");
 		persona.setFechaNacimiento(LocalDate.of(1995, 12, 31));
 		persona.setDocumentos(null);
-		persona.setMensajes(null);
+			ArrayList<Mensaje> msgs = new ArrayList<>();
+			msgs.add(new Mensaje("Holaa"));
+		persona.setMensajes(msgs);
 		domain.getListaPersonas().add(persona);
 		
 		persona = new Persona();
@@ -67,6 +69,7 @@ public class ModelFactoryController {
 		persona.setMensajes(null);
 		domain.getListaPersonas().add(persona);
 
+		persona = new Persona();
 		persona.setId(3);
 		persona.setNombre("Julia");
 		persona.setApellido("Martinez");
@@ -182,8 +185,14 @@ public class ModelFactoryController {
 		return domain.actualizarEstadoTarea(idEquipo, idTarea, nuevoEstado);
 	}
 	
+	public Persona getPersonaPorId(int idPersona) {
+		return domain.getPersonaPorId(idPersona);
+	}
 		
 	
+	public boolean agregarMensaje(int idPersona, Mensaje mensaje) {
+		return domain.agregarMensaje(idPersona, mensaje);
+	}
 	
 	// PERSISTENCIA 
 	

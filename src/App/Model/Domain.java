@@ -78,6 +78,30 @@ public class Domain implements Serializable {
 		return flagActualizada;
 	}		
 	
+	public Persona getPersonaPorId(int idPersona) {
+		Persona personaEncontrada = null;
+
+		for (Persona p : getListaPersonas()) {
+			if(p.getId() == idPersona) {
+				personaEncontrada = p;
+				break;
+			}
+		}
+
+		return personaEncontrada;	
+	}
+	
+
+	public boolean agregarMensaje(int idPersona, Mensaje mensaje) {		
+		if(getPersonaPorId(idPersona)!=null) {
+			System.out.println("idPe: "+idPersona+ " msj: "+mensaje.getContenido());
+			getPersonaPorId(idPersona).getMensajes().add(mensaje);
+			return true;	
+		}
+		
+		return false;
+	}
+	
 	
 	// -------------------------- GETTERS Y SETTERS COMUNES --------------------------  
 	public ArrayList<Persona> getListaPersonas() {
@@ -111,6 +135,5 @@ public class Domain implements Serializable {
 	public void setListaReuniones(ArrayList<Reunion> listaReuniones) {
 		this.listaReuniones = listaReuniones;
 	}
-	
-	
+
 }

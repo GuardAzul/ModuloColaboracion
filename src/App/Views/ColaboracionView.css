@@ -23,3 +23,7 @@
 .btnTransparentes:hover {
 	-fx-background-color: #88B0FF;
 }
+
+.text-area *.text {
+    -fx-text-alignment: right;
+}
