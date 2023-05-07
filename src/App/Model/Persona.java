@@ -10,6 +10,7 @@ public class Persona implements Serializable {
 	private int id;
 	private String nombre;
 	private String apellido;
+	private String contrasenia;
 	private LocalDate fechaNacimiento;
 	private ArrayList<Documento> documentos;
 	private ArrayList<Mensaje> mensajes;
@@ -18,12 +19,13 @@ public class Persona implements Serializable {
 		super();
 	}
 
-	public Persona(int id, String nombre, String apellido, LocalDate fechaNacimiento, ArrayList<Documento> documentos,
-			ArrayList<Mensaje> mensajes) {
+	public Persona(int id, String nombre, String apellido, String contrasenia, LocalDate fechaNacimiento, 
+			ArrayList<Documento> documentos, ArrayList<Mensaje> mensajes) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.contrasenia = contrasenia;
 		this.fechaNacimiento = fechaNacimiento;
 		this.documentos = documentos;
 		this.mensajes = mensajes;
@@ -53,6 +55,14 @@ public class Persona implements Serializable {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+	
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 	public LocalDate getFechaNacimiento() {

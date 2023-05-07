@@ -53,6 +53,7 @@ public class ModelFactoryController {
 		persona.setId(1);
 		persona.setNombre("Ana");
 		persona.setApellido("Rodriguez");
+		persona.setContrasenia("ana123");
 		persona.setFechaNacimiento(LocalDate.of(1995, 12, 31));
 		persona.setDocumentos(null);
 			ArrayList<Mensaje> msgs = new ArrayList<>();
@@ -64,6 +65,7 @@ public class ModelFactoryController {
 		persona.setId(2);
 		persona.setNombre("Carlos");
 		persona.setApellido("Gonzalez");
+		persona.setContrasenia("carlos123");
 		persona.setFechaNacimiento(LocalDate.of(1980, 5, 15));
 		persona.setDocumentos(null);
 		persona.setMensajes(null);
@@ -73,6 +75,7 @@ public class ModelFactoryController {
 		persona.setId(3);
 		persona.setNombre("Julia");
 		persona.setApellido("Martinez");
+		persona.setContrasenia("julia123");
 		persona.setFechaNacimiento(LocalDate.of(1998, 2, 28));
 		persona.setDocumentos(null);
 		persona.setMensajes(null);
@@ -173,6 +176,10 @@ public class ModelFactoryController {
 	}
 	
 	
+	public boolean verificarUsuario(String usuario, String contrasenia) {		
+		return domain.verificarUsuario(usuario, contrasenia);
+	}
+	
 	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
 		return domain.getListaTareasPorEquipo(idEquipo);
 	}
@@ -188,13 +195,16 @@ public class ModelFactoryController {
 	public Persona getPersonaPorId(int idPersona) {
 		return domain.getPersonaPorId(idPersona);
 	}
-		
 	
+	public Persona getPersonaPorUsuarioYContrasenia(String user, String contrasenia) {
+		return domain.getPersonaPorUsuarioYContrasenia(user, contrasenia);
+	}
+		
 	public boolean agregarMensaje(int idPersona, Mensaje mensaje) {
 		return domain.agregarMensaje(idPersona, mensaje);
 	}
-	
 
+	
 	public ArrayList<Documento> listaDocumentos = Domain.obtenerDocumentos();
 
 	

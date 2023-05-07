@@ -1,19 +1,12 @@
 package App.Controllers;
 
-import java.awt.image.BufferedImage;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.Socket;
 import java.net.URL;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import App.MainApp;
-import App.Model.Documento;
-import App.Model.Domain;
 import App.Model.EstadoTarea;
 import App.Model.Mensaje;
 import App.Model.Persona;
@@ -44,7 +37,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 
-public class ColaboracionViewControllers implements Initializable {
+public class ColaboracionViewController implements Initializable {
 
 	@FXML private TabPane mainTabPane;
     @FXML private Label lb_nomProyecto;
@@ -64,6 +57,7 @@ public class ColaboracionViewControllers implements Initializable {
     @FXML private TextArea messageBox;
     @FXML private Button btnSend;
     @FXML private Button btnDoc;
+    @FXML private Button btnLogout;
 
     private MainApp mainApp;
     ModelFactoryController modelFactoryController;
@@ -75,7 +69,8 @@ public class ColaboracionViewControllers implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Platform.runLater(()->{
-			modelFactoryController = ModelFactoryController.getInstance();
+//			modelFactoryController = ModelFactoryController.getInstance();
+			modelFactoryController =  mainApp.getModelFactoryController();
 			inicializarVista();
 		});				
 	}
@@ -84,6 +79,7 @@ public class ColaboracionViewControllers implements Initializable {
 		this.mainApp = mainApp;		
 	}
 	
+   
 	public void inicializarVista() {		
 		// ---------------------------- INFO PROYECTO ----------------------------
 		proyectoAsignado = modelFactoryController.getProyecto(1); // 1 por que es el proyecto asignado al grupo de este usuario 1
@@ -242,6 +238,28 @@ public class ColaboracionViewControllers implements Initializable {
     }
     
     
+  
+    @FXML
+    void onBtnLogout(ActionEvent event) { 
+			mostrarMensaje("Notifacion", "Cerrando Sesion", "Usuario: "+mainApp.getUsuarioLogeado().getNombre()+ " ha cerrado sesion", AlertType.INFORMATION);
+			mainApp.setUsuarioLogeado(null);
+			
+			// Llamo al LoginViewController y cambio la view (el fxml)				
+			try {			
+				FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Views/Login.fxml"));
+				Parent root = loader.load();
+				
+				// Creo el controlador
+				LoginViewController loginViewController = loader.getController();
+				loginViewController.setMainApp(mainApp);
+			
+				Scene scene = new Scene(root);
+				mainApp.getPrimaryStage().setScene(scene);				
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+    		}	
+    }
     
     public void mostrarMensaje(String titulo, String header, String contenido, AlertType alertType){
     	Alert alert = new Alert(alertType);
@@ -260,6 +278,7 @@ public class ColaboracionViewControllers implements Initializable {
 		listaTareasData.addAll(modelFactoryController.getListaTareasPorEquipo(1)) ;
 		return listaTareasData;
 	}
+	
     
   /*  
     @FXML

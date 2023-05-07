@@ -18,6 +18,24 @@ public class Domain implements Serializable {
 
 	
 
+	
+	public boolean verificarUsuario(String nombreUsuario, String contrasenia) {
+		boolean flagUsuarioExistente = false;
+		
+		// Esto compara el nombre de usuario y su contrasenia para verificar 
+		// si se encuentra en la lista
+		for(Persona usuario: listaPersonas){
+			if(usuario.getNombre().equalsIgnoreCase(nombreUsuario) &&
+			   usuario.getContrasenia().equals(contrasenia)){
+				flagUsuarioExistente = true;
+				break;
+			}
+		}
+		
+		return flagUsuarioExistente;
+	}
+	
+	
 
 	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
 		return getEquipoPorId(idEquipo).getTareas();
@@ -94,6 +112,20 @@ public class Domain implements Serializable {
 		return personaEncontrada;	
 	}
 	
+	public Persona getPersonaPorUsuarioYContrasenia(String user, String contrasenia) {
+		Persona personaEncontrada = null;
+
+		for (Persona p : getListaPersonas()) {
+			if((p.getNombre() == user || p.getNombre().equals(user)) &&
+			   (p.getContrasenia() == contrasenia || p.getContrasenia().equals(contrasenia))) {
+				personaEncontrada = p;
+				break;
+			}
+		}
+
+		return personaEncontrada;	
+	}
+	
 
 	public boolean agregarMensaje(int idPersona, Mensaje mensaje) {		
 		if(getPersonaPorId(idPersona)!=null) {
@@ -154,8 +186,6 @@ public class Domain implements Serializable {
 		this.listaReuniones = listaReuniones;
 	}
 
-	
-
 	public static ArrayList<Documento> getDocumentos() {
 		return documentos;
 	}
@@ -164,4 +194,6 @@ public class Domain implements Serializable {
 	public static void setDocumentos(ArrayList<Documento> documentos) {
 		Domain.documentos = documentos;
 	}
+
+
 }

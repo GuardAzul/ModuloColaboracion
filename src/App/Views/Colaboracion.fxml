@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -26,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="546.0" prefWidth="668.0" stylesheets="@ColaboracionView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.Controllers.ColaboracionViewControllers">
+<AnchorPane prefHeight="546.0" prefWidth="668.0" stylesheets="@ColaboracionView.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.Controllers.ColaboracionViewController">
    <children>
       <TabPane fx:id="mainTabPane" layoutX="14.0" layoutY="29.0" prefHeight="507.0" prefWidth="646.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -174,11 +166,11 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="626.0" layoutY="3.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="30.0" styleClass="btnTransparentes">
+      <Button fx:id="btnLogout" layoutX="626.0" layoutY="3.0" mnemonicParsing="false" onAction="#onBtnLogout" prefHeight="27.0" prefWidth="30.0" styleClass="btnTransparentes">
          <graphic>
             <ImageView fitHeight="19.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../COLLEGE/Semestre%204/Programacion%20III/programming3/co.edu.uniquindio.Marketplace/src/co/edu/uniquindio/Marketplace/view/images/Logout.png" />
+                  <Image url="@imagenes/Logout.png" />
                </image>
             </ImageView>
          </graphic>
