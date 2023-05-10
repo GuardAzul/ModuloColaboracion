@@ -9,9 +9,8 @@ public class Equipo implements Serializable{
 	private int id;
 	private String nombre;
 	private EstadoEquipo estado;
-	private ArrayList<Tarea> tareas;
 	private ArrayList<Persona> integrantes;
-	private Proyecto proyecto;
+	private ArrayList<Proyecto> proyectos;
 	
 	
 	public Equipo() {
@@ -19,15 +18,14 @@ public class Equipo implements Serializable{
 	}
 	
 	
-	public Equipo(int id, String nombre, EstadoEquipo estado, ArrayList<Tarea> tareas, 
-			ArrayList<Persona> integrantes, Proyecto proyecto) {
+	public Equipo(int id, String nombre, EstadoEquipo estado, ArrayList<Persona> integrantes, 
+			ArrayList<Proyecto> proyectos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.estado = estado;
-		this.tareas = tareas;
 		this.integrantes = integrantes;
-		this.proyecto = proyecto;
+		this.proyectos = proyectos;
 	}
 
 	//-------------------------------------getters y setters-----------------------------------------
@@ -54,14 +52,6 @@ public class Equipo implements Serializable{
 	public void setEstado(EstadoEquipo estado) {
 		this.estado = estado;
 	}
-
-	public ArrayList<Tarea> getTareas() {
-		return tareas;
-	}
-
-	public void setTareas(ArrayList<Tarea> tareas) {
-		this.tareas = tareas;
-	}
 	
 	public ArrayList<Persona> getIntegrantes() {
 		return integrantes;
@@ -71,12 +61,12 @@ public class Equipo implements Serializable{
 		this.integrantes = integrantes;
 	}
 
-	public Proyecto getProyecto() {
-		return proyecto;
+	public ArrayList<Proyecto> getProyectos() {
+		return proyectos;
 	}
 
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
+	public void setProyectos(ArrayList<Proyecto> proyectos) {
+		this.proyectos = proyectos;
 	}
 
 	

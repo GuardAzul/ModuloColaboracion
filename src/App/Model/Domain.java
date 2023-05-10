@@ -37,15 +37,16 @@ public class Domain implements Serializable {
 	
 	
 
-	public ArrayList<Tarea> getListaTareasPorEquipo(int idEquipo) {
-		return getEquipoPorId(idEquipo).getTareas();
+	public ArrayList<Tarea> getListaTareasPorProyecto(int idProyecto) {
+		return getProyecto(idProyecto).getTareas();
 	}
 	
-	public Tarea getTareaPorIdYEquipo(String idTarea, int idEquipo) {
-		ArrayList<Tarea> equipos = getListaTareasPorEquipo(idEquipo);
+
+	public Tarea getTareaPorIdYProyecto(String idTarea, int idProyecto) {
+		ArrayList<Tarea> tareas = getListaTareasPorProyecto(idProyecto);
 		Tarea tarea = null;
 		
-		for(Tarea t : equipos) {
+		for(Tarea t : tareas) {
 			if(t.getId() == idTarea || t.getId().equalsIgnoreCase(idTarea)) {
 				tarea = t;
 				break;
@@ -69,6 +70,7 @@ public class Domain implements Serializable {
 		return equipo;
 	}
 	
+	
 	public Proyecto getProyecto(int idProyecto) {
 		Proyecto proyectoEncontrado = null;
 
@@ -83,12 +85,14 @@ public class Domain implements Serializable {
 	}
 	
 	
-	public boolean actualizarEstadoTarea(int idEquipo, String idTarea, EstadoTarea nuevoEstado) {
+	// Recordemos: Un proyecto solo puede hacer parte de un equipo (se le 
+	// asigna solo a uno), un equipo puede tener varios proyectos
+	public boolean actualizarEstadoTarea(int idProyecto, String idTarea, EstadoTarea nuevoEstado) {
 		Boolean flagActualizada = false;
-		Equipo equipo = getEquipoPorId(idEquipo);
+		Equipo equipo = getEquipoPorId(idProyecto);
 		
 		if(equipo != null){
-			Tarea tarea = getTareaPorIdYEquipo(idTarea, idEquipo);
+			Tarea tarea = getTareaPorIdYProyecto(idTarea, idProyecto);
 			tarea.setEstado(nuevoEstado);
 			flagActualizada = true;
 		}			
@@ -125,6 +129,49 @@ public class Domain implements Serializable {
 
 		return personaEncontrada;	
 	}
+	
+
+	// Acá podemos obtener directamente los proyectos por el equipo en el que se
+	// encuentra la persona | Según las reglas del negocio y segun el modelado,
+	// una persona solo pueda hacer parte de un solo equipo.
+	public ArrayList<Proyecto> getProyectosPorPersona(int idPersona) {
+		ArrayList<Proyecto> proyectos = null;
+		
+		if(getPersonaPorId(idPersona) != null) {
+			Equipo equipoPersona = getEquipoPorPersona(idPersona);
+			proyectos = equipoPersona.getProyectos();
+		}
+		
+		return proyectos;
+	}
+	
+	public Equipo getEquipoPorPersona(int idPersona) {
+		Equipo equipo = null;
+		
+		for(Equipo e : getListaEquipos()) {
+			if(isPersonaInEquipo(idPersona, e.getId())){
+				equipo = e;
+				break;
+			}
+		}
+		
+		return equipo;
+	}
+	
+	public boolean isPersonaInEquipo(int idPersona, int idEquipo) {
+		Equipo equipo = getEquipoPorId(idEquipo);
+		
+		if(equipo != null) {
+			for(Persona p : equipo.getIntegrantes()) {
+				if(p.getId() == idPersona) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+
 	
 
 	public boolean agregarMensaje(int idPersona, Mensaje mensaje) {		
@@ -194,6 +241,5 @@ public class Domain implements Serializable {
 	public static void setDocumentos(ArrayList<Documento> documentos) {
 		Domain.documentos = documentos;
 	}
-
 
 }

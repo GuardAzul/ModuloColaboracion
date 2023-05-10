@@ -1,6 +1,7 @@
 package App.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Proyecto implements Serializable {
 
@@ -9,17 +10,20 @@ public class Proyecto implements Serializable {
 	private String descripcion;
 	private EstadoProyecto estado;
 	private String nombre;
+	private ArrayList<Tarea> tareas;
 	
 	public Proyecto() {
 		super();
 	}
 
-	public Proyecto(int id, String descripcion, EstadoProyecto estado, String nombre) {
+	public Proyecto(int id, String descripcion, EstadoProyecto estado, String nombre, 
+			ArrayList<Tarea> tareas) {
 		super();
 		this.id = id;
 		this.descripcion = descripcion;
 		this.estado = estado;
 		this.nombre = nombre;
+		this.tareas = tareas;
 	}
 
 	//-------------------------------Getters y Setter----------------------------------------------
@@ -53,6 +57,14 @@ public class Proyecto implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public ArrayList<Tarea> getTareas() {
+		return tareas;
+	}
+
+	public void setTareas(ArrayList<Tarea> tareas) {
+		this.tareas = tareas;
 	}
 
 	@Override

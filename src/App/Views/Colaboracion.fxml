@@ -19,7 +19,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -187,14 +186,10 @@
                            <children>
                               <ScrollPane prefHeight="504.0" prefWidth="676.0">
                                  <content>
-                                    <GridPane>
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
+                                    <GridPane fx:id="gridPaneProyectos" hgap="10.0" prefHeight="0.0" prefWidth="0.0" vgap="10.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
                                     </GridPane>
                                  </content>
                               </ScrollPane>
@@ -209,7 +204,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Label layoutX="560.0" layoutY="24.0" prefHeight="21.0" prefWidth="91.0" text="Grupo #111">
+                        <Label fx:id="lb_Equipo_Persona" alignment="CENTER_RIGHT" layoutX="500.0" layoutY="24.0" prefHeight="21.0" prefWidth="141.0" text="Equipo #111" textAlignment="RIGHT">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>

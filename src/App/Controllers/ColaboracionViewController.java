@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import App.MainApp;
+import App.Controllers.dinamico.ProyectoController;
 import App.Model.EstadoTarea;
 import App.Model.Mensaje;
 import App.Model.Persona;
@@ -34,6 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 
@@ -58,6 +60,9 @@ public class ColaboracionViewController implements Initializable {
     @FXML private Button btnSend;
     @FXML private Button btnDoc;
     @FXML private Button btnLogout;
+    
+    @FXML private Label lb_Equipo_Persona;
+    @FXML private GridPane gridPaneProyectos;
 
     private MainApp mainApp;
     ModelFactoryController modelFactoryController;
@@ -82,34 +87,79 @@ public class ColaboracionViewController implements Initializable {
    
 	public void inicializarVista() {		
 		// ---------------------------- INFO PROYECTO ----------------------------
-		proyectoAsignado = modelFactoryController.getProyecto(1); // 1 por que es el proyecto asignado al grupo de este usuario 1
-		lb_nomProyecto.setText(proyectoAsignado.getNombre());
-	    lb_descProyecto.setText(proyectoAsignado.getDescripcion());
-	    lb_estadoProyecto.setText(proyectoAsignado.getEstado().toString());
-		
-		
-		// ---------------------------- INFO TAREAS ----------------------------
-		cbEstadoTarea.getItems().clear();
-		cbEstadoTarea.getItems().addAll(EstadoTarea.values());
-		
-		col_IdTarea.setCellValueFactory(new PropertyValueFactory<>("id"));
-		col_Tarea.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-		col_EstadoTarea.setCellValueFactory(new PropertyValueFactory<>("estado"));		
-		 
-		limpiarCampos();
-		
-		// Añade los datos de la lista observable a la tabla
-		// Esa lista se obtiene del modelFactoryController
-		tablaTareas.setItems(getTareasData());
-		
-		// Acción de la tabla para mostrar informacion de un empleado
-		tablaTareas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
-			tareaSeleccionada = newSelection;			
-			
-			mostrarInformacionTarea();
-		});
+//		proyectoAsignado = modelFactoryController.getProyecto(1); // 1 por que es el proyecto asignado al grupo de este usuario 1
+//		lb_nomProyecto.setText(proyectoAsignado.getNombre());
+//	    lb_descProyecto.setText(proyectoAsignado.getDescripcion());
+//	    lb_estadoProyecto.setText(proyectoAsignado.getEstado().toString());
+//		
+//		
+//		// ---------------------------- INFO TAREAS ----------------------------
+//		cbEstadoTarea.getItems().clear();
+//		cbEstadoTarea.getItems().addAll(EstadoTarea.values());
+//		
+//		col_IdTarea.setCellValueFactory(new PropertyValueFactory<>("id"));
+//		col_Tarea.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+//		col_EstadoTarea.setCellValueFactory(new PropertyValueFactory<>("estado"));		
+//		 
+//		limpiarCampos();
+//		
+//		// Añade los datos de la lista observable a la tabla
+//		// Esa lista se obtiene del modelFactoryController
+//		tablaTareas.setItems(getTareasData());
+//		
+//		// Acción de la tabla para mostrar informacion de un empleado
+//		tablaTareas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+//			tareaSeleccionada = newSelection;			
+//			
+//			mostrarInformacionTarea();
+//		});
 		
 		inicializarChat();
+		inicializarMenuProyectos();
+	}
+	
+	private void inicializarMenuProyectos() {
+		ArrayList<Proyecto> proyectos = modelFactoryController.getProyectosPorPersona(mainApp.getUsuarioLogeado().getId());
+		lb_Equipo_Persona.setText("Equipo #"+modelFactoryController.getEquipoPorPersona(mainApp.getUsuarioLogeado().getId()).getId());
+		
+		// Recordar: Para proyectos con gridpanes dinamica, en el scenebuilder, siempre
+		// dejar el gridpane sin filas ni columnas (bueno, una si). De tal manera
+		// que quede en el SceneBuilder como: GridPane (1 x 0).
+		// Esto se hace porque ya le estamos agregando la cantidad de elementos que
+		// va a tener, cuantas filas y columnas en esta funcion, y ya el tamaño es
+		// segun el AnchorPane de la vista dinamica que creamos (proyecto.fxml) 
+		gridPaneProyectos.getChildren().clear();
+		int fila = 0;
+		int columna = 0;		
+		
+		for(int i = 0; i<proyectos.size(); i++) {
+			try{
+				// Cargamos la vista dinamica
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(MainApp.class.getResource("Views/dinamico/proyecto.fxml"));
+												
+				// Por estetica, solo se va a permitir ver dos proyectos por fila 
+				// Luego de haber dos en la fila, creamos otra fila.
+				if(columna == 2) {
+					columna = 0;
+					fila++;
+				}
+				
+				// Agregamos la vista al gridpane de proyecto
+				gridPaneProyectos.add(fxmlLoader.load(), ++columna, fila);
+				
+				// Cargamos el controlador de la vista
+				// El controlador solo se crea despues de cargar el fxml 
+				// usando 'fxmlLoader.load()'
+				ProyectoController proyectoController = fxmlLoader.getController();
+				proyectoController.establecerDatos(proyectos.get(i));
+				
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}			
+		}
+		
 	}
 	
 	private void inicializarChat() {
@@ -274,10 +324,10 @@ public class ColaboracionViewController implements Initializable {
 // no tenemos un Login no recibirá ningun parametro, por lo que la lista de tareas  
 // que retorne serán las tareas de un equipo aleatorio (en este caso el equipo 1,
 // en el cual se encuentra el usuario 1)
-    public ObservableList<Tarea> getTareasData(){
-		listaTareasData.addAll(modelFactoryController.getListaTareasPorEquipo(1)) ;
-		return listaTareasData;
-	}
+//    public ObservableList<Tarea> getTareasData(){
+//		listaTareasData.addAll(modelFactoryController.getListaTareasPorEquipo(1)) ;
+//		return listaTareasData;
+//	}
 	
     
   /*  
