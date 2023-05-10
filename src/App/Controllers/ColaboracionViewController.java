@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import App.MainApp;
 import App.Controllers.dinamico.ProyectoController;
-import App.Model.EstadoTarea;
 import App.Model.Mensaje;
 import App.Model.Persona;
 import App.Model.Proyecto;
@@ -25,16 +24,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
@@ -42,16 +34,6 @@ import javafx.stage.FileChooser;
 public class ColaboracionViewController implements Initializable {
 
 	@FXML private TabPane mainTabPane;
-    @FXML private Label lb_nomProyecto;
-    @FXML private Label lb_descProyecto;
-    @FXML private Label lb_estadoProyecto;
-    @FXML private TableView<Tarea> tablaTareas;
-    @FXML private TableColumn<Tarea, String> col_IdTarea;
-    @FXML private TableColumn<Tarea, String> col_Tarea;
-    @FXML private TableColumn<Tarea, String> col_EstadoTarea;
-    @FXML private Button BtnActualizarVendedor;
-    @FXML private ComboBox<EstadoTarea> cbEstadoTarea;
-    @FXML private Label lb_descTarea;
     
     @FXML private HBox onlineUsersHbox;
     @FXML private Label lb_usuario_amigo;
@@ -83,37 +65,8 @@ public class ColaboracionViewController implements Initializable {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;		
 	}
-	
    
-	public void inicializarVista() {		
-		// ---------------------------- INFO PROYECTO ----------------------------
-//		proyectoAsignado = modelFactoryController.getProyecto(1); // 1 por que es el proyecto asignado al grupo de este usuario 1
-//		lb_nomProyecto.setText(proyectoAsignado.getNombre());
-//	    lb_descProyecto.setText(proyectoAsignado.getDescripcion());
-//	    lb_estadoProyecto.setText(proyectoAsignado.getEstado().toString());
-//		
-//		
-//		// ---------------------------- INFO TAREAS ----------------------------
-//		cbEstadoTarea.getItems().clear();
-//		cbEstadoTarea.getItems().addAll(EstadoTarea.values());
-//		
-//		col_IdTarea.setCellValueFactory(new PropertyValueFactory<>("id"));
-//		col_Tarea.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-//		col_EstadoTarea.setCellValueFactory(new PropertyValueFactory<>("estado"));		
-//		 
-//		limpiarCampos();
-//		
-//		// Añade los datos de la lista observable a la tabla
-//		// Esa lista se obtiene del modelFactoryController
-//		tablaTareas.setItems(getTareasData());
-//		
-//		// Acción de la tabla para mostrar informacion de un empleado
-//		tablaTareas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
-//			tareaSeleccionada = newSelection;			
-//			
-//			mostrarInformacionTarea();
-//		});
-		
+	public void inicializarVista() {				
 		inicializarChat();
 		inicializarMenuProyectos();
 	}
@@ -152,7 +105,7 @@ public class ColaboracionViewController implements Initializable {
 				// El controlador solo se crea despues de cargar el fxml 
 				// usando 'fxmlLoader.load()'
 				ProyectoController proyectoController = fxmlLoader.getController();
-				proyectoController.establecerDatos(proyectos.get(i));
+				proyectoController.establecerDatos(proyectos.get(i), mainApp);
 				
 			}
 			catch (IOException e) {
@@ -174,12 +127,6 @@ public class ColaboracionViewController implements Initializable {
 		
 	}
 	
-	private void mostrarInformacionTarea() {
-		if(tareaSeleccionada != null){
-			lb_descTarea.setText(tareaSeleccionada.getDescripción());
-		    cbEstadoTarea.getSelectionModel().select(tareaSeleccionada.getEstado());
-		}	
-	}
 	
 	private void cargarMensajesChat(Persona pers) {
 		ArrayList<Mensaje> mensajes = pers.getMensajes();		
@@ -194,32 +141,6 @@ public class ColaboracionViewController implements Initializable {
 		}
 		
 	}
-	
-	
-	public void limpiarCampos() {
-		// Limpio los textfield y combobox
-		lb_descTarea.setText("");		
-		cbEstadoTarea.getSelectionModel().clearSelection();		
-		
-		tablaTareas.getSelectionModel().clearSelection();		
-    }
-	
-	
-	@FXML
-    void onBtnActualizarTarea(ActionEvent event) {
-		int idEquipo = 1; // Equipo en el que está el usuario (Esto no se conoce, debe ser de otro modulo)
-		String idTarea = tareaSeleccionada.getId();
-		EstadoTarea nuevoEstado = cbEstadoTarea.getValue();
-		if (modelFactoryController.actualizarEstadoTarea(idEquipo, idTarea, nuevoEstado)) {
-			mostrarMensaje("Notificacion", "Tarea Actualizada", "La tarea ha sido actualizada con exito", AlertType.INFORMATION);
-			modelFactoryController.guardarResourceBinario();
-			tablaTareas.refresh();
-		}			
-		else {
-			mostrarMensaje("Error", "Tarea No Actualizada", "La tarea NO ha sido actualizada con exito", AlertType.ERROR);
-		}					
-    }
-
 
     @FXML
     void onBtnSend(ActionEvent event) {
@@ -248,7 +169,7 @@ public class ColaboracionViewController implements Initializable {
     																	   
     	fileChooser.getExtensionFilters().addAll(ext1, ext2, ext3, ext4, ext5, ext6, ext7);
     	
-    	File archivoSeleccionado = fileChooser.showOpenDialog( this.BtnActualizarVendedor.getScene().getWindow() );
+    	File archivoSeleccionado = fileChooser.showOpenDialog( this.btnSend.getScene().getWindow() );
     	
     	System.out.println(archivoSeleccionado.getName());
 
@@ -384,13 +305,4 @@ public class ColaboracionViewController implements Initializable {
 //        }
 //
 //        }
-    }
-
-	
-    
-    
-    
-   
-    	
-       
-
+}
