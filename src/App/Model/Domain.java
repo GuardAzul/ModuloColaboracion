@@ -89,11 +89,10 @@ public class Domain implements Serializable {
 	// asigna solo a uno), un equipo puede tener varios proyectos
 	public boolean actualizarEstadoTarea(int idProyecto, String idTarea, EstadoTarea nuevoEstado) {
 		Boolean flagActualizada = false;
-		Equipo equipo = getEquipoPorId(idProyecto);
+		Proyecto proyecto = getProyecto(idProyecto);
 		
-		if(equipo != null){
-			Tarea tarea = getTareaPorIdYProyecto(idTarea, idProyecto);
-			tarea.setEstado(nuevoEstado);
+		if(proyecto != null){
+			getTareaPorIdYProyecto(idTarea, idProyecto).setEstado(nuevoEstado);
 			flagActualizada = true;
 		}			
 		else{

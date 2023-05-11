@@ -42,6 +42,7 @@ public class ColaboracionViewController implements Initializable {
     @FXML private Button btnSend;
     @FXML private Button btnDoc;
     @FXML private Button btnLogout;
+    @FXML private Button btnUser;
     
     @FXML private Label lb_Equipo_Persona;
     @FXML private GridPane gridPaneProyectos;
@@ -66,7 +67,8 @@ public class ColaboracionViewController implements Initializable {
 		this.mainApp = mainApp;		
 	}
    
-	public void inicializarVista() {				
+	public void inicializarVista() {
+		btnUser.setText(mainApp.getUsuarioLogeado().getNombre());
 		inicializarChat();
 		inicializarMenuProyectos();
 	}

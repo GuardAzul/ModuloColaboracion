@@ -28,6 +28,10 @@
 	-fx-background-color: #88B0FF;
 }
 
+.Transparente {
+	-fx-background-color: transparent;
+}
+
 .text-area *.text {
     -fx-text-alignment: right;
 }

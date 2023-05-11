@@ -28,6 +28,10 @@
 	-fx-background-color: #88B0FF;
 }
 
+.Transparente {
+	-fx-background-color: transparent;
+}
+
 .text-area *.text {
     -fx-text-alignment: right;
 }
@@ -84,3 +88,11 @@
 	-fx-background-radius: 100%;
 	-fx-text-fill:white;
 }*/
+
+#btnRegresar {
+	-fx-background-color: #e9edc9;
+}
+
+#btnRegresar:hover {
+	-fx-background-color: #ccd5ae;
+}

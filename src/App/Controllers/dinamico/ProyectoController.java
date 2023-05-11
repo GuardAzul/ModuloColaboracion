@@ -68,7 +68,7 @@ public class ProyectoController implements Initializable {
 
 			// Creo el controlador y se le asigna la MainApp
 			InfoProyectoViewController infoProyectoViewController = loader.getController();
-			infoProyectoViewController.setMainApp(mainApp);
+			infoProyectoViewController.setMainAppYProyecto(mainApp, proyecto);
 			
 			Scene scene = new Scene(root);
 			mainApp.getPrimaryStage().setScene(scene);					
