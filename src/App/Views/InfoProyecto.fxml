@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +15,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="580.0" prefWidth="780.0" stylesheets="@InfoProyectoView.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="App.Controllers.InfoProyectoViewController">
@@ -94,13 +92,27 @@
                            </font>
                         </Label>
                         <Separator layoutY="226.0" prefHeight="7.0" prefWidth="717.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1dbd0" height="228.0" layoutX="567.0" layoutY="249.0" stroke="TRANSPARENT" strokeType="INSIDE" width="13.0" />
                         <Label layoutX="32.0" layoutY="257.0" prefHeight="27.0" prefWidth="97.0" text="Integrantes">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <TextArea layoutX="141.0" layoutY="263.0" prefHeight="198.0" prefWidth="377.0" style="-fx-background-color: #d1dbd0;" />
+                        <HBox layoutX="21.0" layoutY="284.0" prefHeight="205.0" prefWidth="676.0" styleClass="Transparente">
+                           <children>
+                              <ScrollPane prefHeight="100.0" prefWidth="676.0" styleClass="Transparente">
+                                 <content>
+                                    <GridPane fx:id="gridPaneIntegrantes" hgap="30.0" prefHeight="0.0" prefWidth="0.0" vgap="30.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <padding>
+                                          <Insets bottom="5.0" top="10.0" />
+                                       </padding>
+                                    </GridPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </HBox>
                      </children>
                   </AnchorPane>
                </content>

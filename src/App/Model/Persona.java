@@ -10,6 +10,7 @@ public class Persona implements Serializable {
 	private int id;
 	private String nombre;
 	private String apellido;
+	private String email;
 	private String contrasenia;
 	private LocalDate fechaNacimiento;
 	private ArrayList<Documento> documentos;
@@ -19,8 +20,8 @@ public class Persona implements Serializable {
 		super();
 	}
 
-	public Persona(int id, String nombre, String apellido, String contrasenia, LocalDate fechaNacimiento, 
-			ArrayList<Documento> documentos, ArrayList<Mensaje> mensajes) {
+	public Persona(int id, String nombre, String apellido, String contrasenia, String email,
+			LocalDate fechaNacimiento, ArrayList<Documento> documentos, ArrayList<Mensaje> mensajes) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -69,6 +70,14 @@ public class Persona implements Serializable {
 		return fechaNacimiento;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
@@ -91,8 +100,9 @@ public class Persona implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
-				+ fechaNacimiento + "]";
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", contrasenia=" + contrasenia + ", fechaNacimiento=" + fechaNacimiento + ", documentos=" + documentos
+				+ ", mensajes=" + mensajes + "]";
 	}
-
+	
 }

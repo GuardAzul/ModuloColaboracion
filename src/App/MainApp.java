@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import App.Controllers.LoginViewController;
 import App.Controllers.ModelFactoryController;
+import App.Model.Equipo;
 import App.Model.Persona;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ public class MainApp extends Application {
 
 	private ModelFactoryController modelFactoryController;
 	Persona usuarioLogeado;
+	Equipo equipoUsuarioLogeado;
 //	Domain domain;	
 
 
@@ -78,10 +80,15 @@ public class MainApp extends Application {
 	
 	public void setUsuarioLogeado(Persona usuarioLogeado) {
 		this.usuarioLogeado = usuarioLogeado;
+		equipoUsuarioLogeado = modelFactoryController.getEquipoPorPersona(usuarioLogeado.getId());
 	}
 
 	public Persona getUsuarioLogeado() {
 		return usuarioLogeado;
+	}
+
+	public Equipo getEquipoUsuarioLogeado() {
+		return equipoUsuarioLogeado;
 	}
 
 	public static void main(String[] args) {

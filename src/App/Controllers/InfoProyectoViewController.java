@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import App.MainApp;
+import App.Controllers.dinamico.IntegranteController;
 import App.Controllers.dinamico.TareaController;
 import App.Model.Persona;
 import App.Model.Proyecto;
@@ -34,8 +35,9 @@ public class InfoProyectoViewController implements Initializable {
     @FXML private Label lb_descProyecto;
     @FXML private Label lb_estadoProyecto;
 
-    @FXML private Button BtnActualizarVendedor;
+    @FXML private GridPane gridPaneIntegrantes;
     @FXML private GridPane gridPaneTareas;
+    @FXML private Button BtnActualizarVendedor;
     
     @FXML private Button btnUser;
     @FXML private Button btnLogout;
@@ -69,11 +71,13 @@ public class InfoProyectoViewController implements Initializable {
 	    lb_descProyecto.setText(proyectoAsignado.getDescripcion());
 	    lb_estadoProyecto.setText(proyectoAsignado.getEstado().toString());
 	    
+	    inicializarIntegrantes();
 	    inicializarTareas();
 	}
 	
 	public void inicializarTareas() {
 		ArrayList<Tarea> tareas = modelFactoryController.getListaTareasPorProyecto(proyectoAsignado.getId());
+		System.out.println(tareas);
 		
 		gridPaneTareas.getChildren().clear();
 		int fila = 0;	
@@ -95,6 +99,36 @@ public class InfoProyectoViewController implements Initializable {
 				// usando 'fxmlLoader.load()'
 				TareaController tareaController = fxmlLoader.getController();
 				tareaController.establecerDatos(mainApp, proyectoAsignado,tareas.get(i));				
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}			
+		}
+	}
+	
+	public void inicializarIntegrantes() {
+		ArrayList<Persona> integrantes = mainApp.getEquipoUsuarioLogeado().getIntegrantes();
+		
+		gridPaneTareas.getChildren().clear();
+		int fila = 0;	
+		
+		for(int i = 0; i<integrantes.size(); i++) {
+			try{
+				// Cargamos la vista dinamica
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(MainApp.class.getResource("Views/dinamico/integrante.fxml"));
+				
+				// Agregamos la vista al gridpane de proyecto
+				gridPaneIntegrantes.add(fxmlLoader.load(), 0, fila);
+				
+				// No se usan columnas, porque solo será una, solo aumentarán las filas
+				fila++;
+				
+				// Cargamos el controlador de la vista
+				// El controlador solo se crea despues de cargar el fxml 
+				// usando 'fxmlLoader.load()'
+				IntegranteController integranteController = fxmlLoader.getController();
+				integranteController.establecerDatos(mainApp, integrantes.get(i));				
 			}
 			catch (IOException e) {
 				e.printStackTrace();

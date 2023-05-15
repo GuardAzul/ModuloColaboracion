@@ -46,7 +46,7 @@
 }
 
 .tab .tab-label {
-	-fx-background.color: transparent;
+	-fx-background-color: transparent;
 	-fx-alignment: center;
 }
 

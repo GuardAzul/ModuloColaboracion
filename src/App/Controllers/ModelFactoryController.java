@@ -53,6 +53,7 @@ public class ModelFactoryController {
 		persona.setNombre("Ana");
 		persona.setApellido("Rodriguez");
 		persona.setContrasenia("ana123");
+		persona.setEmail("ana@email.com");
 		persona.setFechaNacimiento(LocalDate.of(1995, 12, 31));
 		persona.setDocumentos(null);
 			ArrayList<Mensaje> msgs = new ArrayList<>();
@@ -65,6 +66,7 @@ public class ModelFactoryController {
 		persona.setNombre("Carlos");
 		persona.setApellido("Gonzalez");
 		persona.setContrasenia("carlos123");
+		persona.setEmail("carlos@email.com");
 		persona.setFechaNacimiento(LocalDate.of(1980, 5, 15));
 		persona.setDocumentos(null);
 		persona.setMensajes(null);
@@ -75,6 +77,7 @@ public class ModelFactoryController {
 		persona.setNombre("Julia");
 		persona.setApellido("Martinez");
 		persona.setContrasenia("julia123");
+		persona.setEmail("julia@email.com");
 		persona.setFechaNacimiento(LocalDate.of(1998, 2, 28));
 		persona.setDocumentos(null);
 		persona.setMensajes(null);
