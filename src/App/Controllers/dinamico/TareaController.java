@@ -8,6 +8,7 @@ import App.MainApp;
 import App.Model.EstadoTarea;
 import App.Model.Proyecto;
 import App.Model.Tarea;
+import App.Service.EmailService;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -100,8 +101,30 @@ public class TareaController implements Initializable {
 					inicializarDatos();
 					
 					// Y se notifica
-					// TODO: PONER LO DEL CODIGO EMAILSERVICE Y EL HTML
-					System.out.println("NOTIFICADO");
+
+					String equipo = mainApp.getEquipoUsuarioLogeado().getNombre();
+					String nombreCompleto = mainApp.getUsuarioLogeado().getNombre()+" "+mainApp.getUsuarioLogeado().getApellido();
+					boolean isCorreoEnviado;
+					
+					isCorreoEnviado = EmailService.enviarEmail("CAMU Notificaciones | Tarea Actualizada!"
+			                ,"<!DOCTYPE html>\n" +
+			                        "<html>\n" +
+			                        "    <head>\n" +
+			                        "        <title>Actualización de tarea</title>\n" +
+			                        "    </head>\n" +
+			                        "    <body>\n" +
+			                        "        <p><strong>Camu!</strong></p>\n" +
+			                        "        <p><strong>Hola, Lider del equipo "+ equipo + ". Bienvenido a Camu!</strong></p>\n" +
+			                        "        <p>El usuario "+ nombreCompleto + " ha realizado un cambio a la tarea:</p>\n" +
+			                        "        <p>Tarea: |ID-"+ tarea.getId() + "|  "+ tarea.getNombre() +" Asignada al proyecto: |ID-"+idProyecto+"| "+proyecto.getNombre()+"</p>\n" +
+			                        "    </body>\n" +
+			                        "</html>"
+			                ,"julian.acostat@uqvirtual.edu.co");
+					
+					if(isCorreoEnviado)
+						mostrarMensaje("Notifacion", "Notificacion enviada", "La notificacion del nuevo cambio se ha realizado", AlertType.INFORMATION);									
+					else
+						mostrarMensaje("Notifacion", "Notificado no enviada", "El correo no pudo enviar, error del sistema lo sentimos :c", AlertType.ERROR);
 				}			
 				else {
 					mostrarMensaje("Error", "Tarea No Actualizada", "La tarea NO ha sido actualizada", AlertType.ERROR);

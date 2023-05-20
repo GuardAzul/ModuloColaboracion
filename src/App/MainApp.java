@@ -80,7 +80,9 @@ public class MainApp extends Application {
 	
 	public void setUsuarioLogeado(Persona usuarioLogeado) {
 		this.usuarioLogeado = usuarioLogeado;
-		equipoUsuarioLogeado = modelFactoryController.getEquipoPorPersona(usuarioLogeado.getId());
+		
+		if (this.usuarioLogeado != null)
+			equipoUsuarioLogeado = modelFactoryController.getEquipoPorPersona(usuarioLogeado.getId());			
 	}
 
 	public Persona getUsuarioLogeado() {
